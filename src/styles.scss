@@ -1,5 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import 'theme.scss';
 
 html, body, app-root, .site, md-sidenav-container {
   width: 100%;
@@ -17,4 +16,35 @@ main {
   flex: 1;
 }
 
+.fill-remaining-space {
+  /*使用flexbox填充剩余空间*/
+  /*@angular/material中很多控件使用flex布局*/
+  flex: 1 1 auto;
+}
 
+.full-width {
+  width: 100%;
+}
+
+.fab-button {
+  position: fixed;
+  right: 32px;
+  bottom: 96px;
+  z-index: 998;
+}
+
+.mat-icon {
+  line-height: 1;
+}
+
+.top-6px{
+  position: relative;
+  top: 6px;
+}
+
+md-radio-button{
+  margin-right: 32px;
+}
+md-radio-button:last-child{
+  margin-right: 0px;
+}
