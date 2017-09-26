@@ -1,0 +1,13 @@
+md-card{
+  height: initial;
+  width: initial;
+}
+
+md-icon.avatar{
+  width: 64px;
+  height: 64px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  overflow: hidden;
+}
