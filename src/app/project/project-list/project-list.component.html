@@ -2,6 +2,8 @@
   *ngFor="let project of projects"
   [item]="project" class="card"
   (onInviteEE)="openInviteDialog()"
+  (onUpdateProjectEE)="openUpdateProjectDialog(project)"
+  (onDeleteProjectEE)="openDeleteProjectDialog(project)"
 >
 
 </app-project-item>
