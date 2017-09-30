@@ -1,14 +1,22 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostBinding, OnInit} from '@angular/core';
 import {MdDialog} from "@angular/material";
 import {NewTaskComponent} from "../new-task/new-task.component";
 import {CopyTaskComponent} from "../copy-task/copy-task.component";
+import {ConfirmDialogComponent} from "../../shared/confirm-dialog/confirm-dialog.component";
+import {NewTaskListComponent} from "../new-task-list/new-task-list.component";
+import {slideToRight} from "../../anims/router.anim";
 
 @Component({
   selector: 'app-task-home',
   templateUrl: './task-home.component.html',
-  styleUrls: ['./task-home.component.scss']
+  styleUrls: ['./task-home.component.scss'],
+  animations:[
+    slideToRight
+  ]
 })
 export class TaskHomeComponent implements OnInit {
+
+  @HostBinding('@routeAnim') state;
 
   constructor(private dialog: MdDialog) {
   }
@@ -117,29 +125,76 @@ export class TaskHomeComponent implements OnInit {
   ];
 
   openNewTaskListDialog() {
+    const dialogRef = this.dialog.open(NewTaskListComponent, {
+      data: {
+        title: '新建任务列表',
+        content: null
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result)
+        console.log('确定新建任务列表：');
+      else {
+        console.log('取消新建任务列表：');
+      }
+    });
   }
 
   openNewTaskDialog() {
-    this.dialog.open(NewTaskComponent,{
-      data:{
-        title:'新建任务',
-        task:null
+    this.dialog.open(NewTaskComponent, {
+      data: {
+        title: '新建任务',
+        task: null
       }
     });
   }
 
   openMoveTaskDialog() {
     const dialogRef = this.dialog.open(CopyTaskComponent, {
-        data: {
-          lists: this.lists
-        }
-      });
+      data: {
+        lists: this.lists
+      }
+    });
   }
 
   openUpdateTaskDialog(task) {
-    const dialogRef = this.dialog.open(NewTaskComponent,{data:{
-      title:'修改任务',
-      task:task
-    }});
+    const dialogRef = this.dialog.open(NewTaskComponent, {
+      data: {
+        title: '修改任务',
+        task: task
+      }
+    });
+  }
+
+  openDeleteTaskListDialog(list) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: '删除任务',
+        content: "您确定要删除任务列表：“" + list.name + "”吗？"
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result)
+        console.log('确定删除任务列表：' + list.name);
+      else {
+        console.log('取消删除任务列表：' + list.name);
+      }
+    });
+  }
+
+  openUpdateTaskListDialog(list){
+    const dialogRef = this.dialog.open(NewTaskListComponent, {
+      data: {
+        title: '修改任务列表',
+        content: "您确定要修改任务列表：“" + list.name + "”吗？"
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result)
+        console.log('确定修改任务列表：' + list.name);
+      else {
+        console.log('取消修改任务列表：' + list.name);
+      }
+    });
   }
 }

@@ -10,6 +10,7 @@ import {
   MdSlideToggleModule,
   MdGridListModule, MdDialogModule, MdAutocompleteModule, MdOptionModule, MdMenuModule, MdCheckboxModule, MdTooltip,
   MdTooltipModule, MdRadioModule, MdNativeDateModule, MdDatepickerModule, MdDatepickerToggle, MdSelectModule,
+  MdSidenavModule,
 } from '@angular/material';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
@@ -34,6 +35,7 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     MdNativeDateModule,
     MdRadioModule,
     MdSelectModule,
+    MdSidenavModule,
   ],
   exports: [
     CommonModule,
@@ -55,6 +57,7 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     MdNativeDateModule,
     MdRadioModule,
     MdSelectModule,
+    MdSidenavModule,
   ],
   declarations: [ConfirmDialogComponent],
   entryComponents:[

@@ -37,14 +37,22 @@ main {
   line-height: 1;
 }
 
-.top-6px{
+.top-6px {
   position: relative;
   top: 6px;
 }
 
-md-radio-button{
+md-radio-button {
   margin-right: 32px;
 }
-md-radio-button:last-child{
+
+md-radio-button:last-child {
   margin-right: 0px;
 }
+
+.square {
+  width: 100px;
+  height: 100px;
+  background-color: crimson;
+}
+

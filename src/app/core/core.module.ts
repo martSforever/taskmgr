@@ -14,15 +14,25 @@ import {FooterComponent} from './footer/footer.component';
 import {SidebarComponent} from './sidebar/sidebar.component';
 /*加载svg组件*/
 import {loadSvgResource} from "../utils/svg.utils";
+import 'hammerjs';
+import {AppRoutingModule} from "../app-routing.module";
+import {RouterModule} from "@angular/router";
 
 @NgModule({
   imports: [
     HttpModule,
     SharedModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AppRoutingModule,
   ],
   declarations: [HeaderComponent, FooterComponent, SidebarComponent],
-  exports: [HeaderComponent, FooterComponent, SidebarComponent]
+  exports: [
+    HeaderComponent,
+    FooterComponent,
+    SidebarComponent,
+    AppRoutingModule,
+    RouterModule
+  ]
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parent: CoreModule, ir: MdIconRegistry, ds: DomSanitizer) {

@@ -10,8 +10,8 @@ import {MD_DIALOG_DATA, MdDialogRef} from "@angular/material";
         {{content}}
       </div>
       <div md-dialog-actions>
-        <button type="button" md-raised-button color="primary" (click)="onSave(true)">保存</button>
-        <button type="button" md-button md-dialog-close (click)="onSave(false)">取消</button>
+        <button type="button" md-raised-button color="primary" (click)="onConfirm(true)">确认</button>
+        <button type="button" md-button md-dialog-close (click)="onConfirm(false)">取消</button>
       </div>
     </form>
 
@@ -31,7 +31,7 @@ export class ConfirmDialogComponent implements OnInit {
     this.content = this.data.content;
   }
 
-  onSave(flag: boolean) {
+  onConfirm(flag: boolean) {
     this.dialogRef.close(flag);
   }
 

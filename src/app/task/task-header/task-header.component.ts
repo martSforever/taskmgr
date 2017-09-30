@@ -7,20 +7,31 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class TaskHeaderComponent implements OnInit {
 
-  @Input() header = '?';
+  @Input() list;
   @Output() newTaskEE = new EventEmitter<void>();
   @Output() moveAllTaskEE = new EventEmitter<void>();
+  @Output() deleteTaskListEE = new EventEmitter<void>();
+  @Output() updateTaskListEE = new EventEmitter<void>();
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }
 
-  onNewTask(){
+  onNewTask() {
     this.newTaskEE.emit();
   }
 
   onMoveAllTask() {
     this.moveAllTaskEE.emit();
+  }
+
+  onDeleteTaskList() {
+    this.deleteTaskListEE.emit();
+  }
+
+  onUpdateTaskList() {
+    this.updateTaskListEE.emit();
   }
 }
