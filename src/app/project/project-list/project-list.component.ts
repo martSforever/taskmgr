@@ -1,4 +1,4 @@
-import {Component, HostBinding, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, OnInit} from '@angular/core';
 import {MdDialog} from "@angular/material";
 import {NewProjectComponent} from "../new-project/new-project.component";
 import {InviteComponent} from "../invite/invite.component";
@@ -12,7 +12,8 @@ import {listAnimation} from "../../anims/list.anim";
   styleUrls: ['./project-list.component.scss'],
   animations: [
     slideToRight, listAnimation
-  ]
+  ],
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class ProjectListComponent implements OnInit {
 
@@ -33,7 +34,7 @@ export class ProjectListComponent implements OnInit {
     },
   ];
 
-  constructor(private dialog: MdDialog) {
+  constructor(private dialog: MdDialog,private cd :ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -51,6 +52,7 @@ export class ProjectListComponent implements OnInit {
       if (result) {
         console.log('确定新建项目');
         this.projects = [...this.projects,{id:3,name:'一个新项目',desc:'这是一个新项目',coverImg:'assets/img/covers/2.jpg'}];
+        this.cd.markForCheck();
       } else {
         console.log('取消新建项目');
       }
@@ -88,6 +90,7 @@ export class ProjectListComponent implements OnInit {
       if (result) {
         console.log('删除项目：' + project.name);
         this.projects = this.projects.filter(p=>p.id!==project.id);
+        this.cd.markForCheck();
       }
       else console.log('取消删除项目...');
     });

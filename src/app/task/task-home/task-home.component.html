@@ -1,5 +1,22 @@
 <div class="task-lists">
-  <app-task-list *ngFor="let list of lists" class="list-container">
+  <!--能接受拖拽：app-droppable [dragEnterClass] [dropTags]-->
+  <!--能拖拽: app-draggable dragTag dragData draggedClass-->
+
+  <app-task-list
+    *ngFor="let list of lists"
+    class="list-container"
+
+    app-droppable
+    [dragEnterClass]="'drag-enter'"
+    [dropTags]="['task-item','task-list']"
+
+    [app-draggable]="true"
+    [dragTag]="'task-list'"
+    [dragData]="list"
+    [draggedClass]="'drag-start'"
+
+    (dropEE)="handleMove($event,list)"
+  >
     <app-task-header
       [list]="list"
       (newTaskEE)="openNewTaskDialog()"

@@ -1,4 +1,4 @@
-import {Component, HostBinding, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, OnInit} from '@angular/core';
 import {MdDialog} from "@angular/material";
 import {NewTaskComponent} from "../new-task/new-task.component";
 import {CopyTaskComponent} from "../copy-task/copy-task.component";
@@ -10,15 +10,16 @@ import {slideToRight} from "../../anims/router.anim";
   selector: 'app-task-home',
   templateUrl: './task-home.component.html',
   styleUrls: ['./task-home.component.scss'],
-  animations:[
+  animations: [
     slideToRight
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TaskHomeComponent implements OnInit {
 
   @HostBinding('@routeAnim') state;
 
-  constructor(private dialog: MdDialog) {
+  constructor(private dialog: MdDialog, private cd: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -132,8 +133,10 @@ export class TaskHomeComponent implements OnInit {
       }
     });
     dialogRef.afterClosed().subscribe(result => {
-      if (result)
+      if (result) {
         console.log('确定新建任务列表：');
+        this.cd.markForCheck();
+      }
       else {
         console.log('取消新建任务列表：');
       }
@@ -174,15 +177,17 @@ export class TaskHomeComponent implements OnInit {
       }
     });
     dialogRef.afterClosed().subscribe(result => {
-      if (result)
+      if (result) {
         console.log('确定删除任务列表：' + list.name);
+        this.cd.markForCheck();
+      }
       else {
         console.log('取消删除任务列表：' + list.name);
       }
     });
   }
 
-  openUpdateTaskListDialog(list){
+  openUpdateTaskListDialog(list) {
     const dialogRef = this.dialog.open(NewTaskListComponent, {
       data: {
         title: '修改任务列表',
@@ -190,11 +195,28 @@ export class TaskHomeComponent implements OnInit {
       }
     });
     dialogRef.afterClosed().subscribe(result => {
-      if (result)
+      if (result) {
         console.log('确定修改任务列表：' + list.name);
+        this.cd.markForCheck();
+      }
       else {
         console.log('取消修改任务列表：' + list.name);
       }
     });
   }
+
+  handleMove(srcData, list) {
+    console.log('列表：'+list.name+' 接收到拖拽事件...');
+    switch (srcData.tag) {
+      case 'task-item':
+        console.log('handle task item...');
+        break;
+      case 'task-list':
+        console.log('handle task list...');
+        break;
+      default:
+        console.log('no match type...');
+    }
+  }
+
 }

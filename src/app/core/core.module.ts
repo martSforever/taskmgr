@@ -17,6 +17,7 @@ import {loadSvgResource} from "../utils/svg.utils";
 import 'hammerjs';
 import {AppRoutingModule} from "../app-routing.module";
 import {RouterModule} from "@angular/router";
+import 'rxjs/add/operator/take';
 
 @NgModule({
   imports: [
@@ -32,6 +33,9 @@ import {RouterModule} from "@angular/router";
     SidebarComponent,
     AppRoutingModule,
     RouterModule
+  ],
+  providers:[
+    {provide:'BASE_CONFIG',useValue:'http://localhost:3000'},
   ]
 })
 export class CoreModule {
